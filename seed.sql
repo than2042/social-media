@@ -37,5 +37,11 @@ ADD  sm_like_id INTEGER REFERENCES sm_like(id)
 ALTER TABLE sm_post
 ADD follower_id INTEGER REFERENCES follower(id)  
 
--- deleteing table
+-- delete table
 drop table sm_user 
+
+-- delete row
+DELETE FROM sm_user WHERE id = 2
+
+INSERT INTO follower(id, sm_user_id) VALUES(1, 7);
+INSERT INTO sm_like(id, sm_post_id) VALUES(1, 1);

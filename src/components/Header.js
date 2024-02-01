@@ -21,7 +21,7 @@ const Header = () => {
             </a>
           </NavigationMenu.Link>
           <NavigationMenu.Link asChild>
-            <a href="/post">
+            <a href="/posts">
               {" "}
               <InfoCircledIcon /> Post
             </a>
