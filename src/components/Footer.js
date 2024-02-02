@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { InstagramLogoIcon, TwitterLogoIcon } from "@radix-ui/react-icons";
+
 import "../styles/Footer.css";
 
 const Footer = () => {
