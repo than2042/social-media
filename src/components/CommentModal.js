@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import ChatIcon from "@mui/icons-material/Chat";
 import CommentForm from "./CommentForm";
 
-import "../styles/Comment.css";
+import "../styles/comment.css";
 
 const CommentModal = ({ handleComment, name, type, id, defaultValue = "" }) => {
   const [open, setOpen] = useState(false);
