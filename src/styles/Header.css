@@ -10,6 +10,12 @@ p {
   all: unset;
 }
 
+.logo {
+  margin-top: 2rem;
+  width: 6rem;
+  height: 6rem;
+}
+
 .NavigationMenuRoot {
   position: relative;
   display: flex;

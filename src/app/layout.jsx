@@ -1,14 +1,11 @@
 import { Inter, Roboto } from "next/font/google";
-import Header from "@/components/Header";
-import { ClerkProvider, auth, UserButton, SignIn } from "@clerk/nextjs";
 import { sql } from "@vercel/postgres";
-
-// import { revalidatePath } from "next/cache";
-// import { redirect } from "next/navigation";
-import "./globals.css";
+import { ClerkProvider, auth, UserButton, SignIn } from "@clerk/nextjs";
 import Link from "next/link";
-import Footer from "@/components/Footer";
+import Header from "@/components/Header";
 import CreateProfile from "@/components/CreateProfile";
+// import Footer from "@/components/Footer";
+import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 const roboto = Roboto({ subsets: ["greek"], weight: "400" });
@@ -42,23 +39,12 @@ export default async function RootLayout({ children }) {
           {rowCount !== 0 && (
             <main className={roboto.className}>{children}</main>
           )}
-          {rowCount === 0 && <CreateProfile />}
+          {!userId && <SignIn />}
+          {userId && rowCount === 0 && <CreateProfile />}
 
-          <Footer />
+          {/* <Footer /> */}
         </body>
       </html>
     </ClerkProvider>
   );
 }
-
-{
-  /* {!signedIn && <Link href="/sign-in">Sign In</Link>} */
-}
-{
-  /* {!userId && <Link href="/sign-in">Sign In</Link>} */
-}
-{
-  /* <main className={roboto.className}>{children}</main> */
-}
-
-// signedIn

@@ -3,11 +3,7 @@
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import "../styles/Header.css";
 
-import {
-  HomeIcon,
-  EnvelopeClosedIcon,
-  InfoCircledIcon,
-} from "@radix-ui/react-icons";
+// import { HomeIcon, InfoCircledIcon } from "@radix-ui/react-icons";
 
 const Header = () => {
   return (
@@ -15,24 +11,19 @@ const Header = () => {
       <NavigationMenu.List className="NavigationMenuList">
         <NavigationMenu.Item>
           <NavigationMenu.Link asChild>
-            <a href="/">
-              {" "}
-              <HomeIcon /> Home
-            </a>
+            <img className="logo" src="/TTelebook-logos.png" alt=" logo" />
           </NavigationMenu.Link>
           <NavigationMenu.Link asChild>
+            <a href="/">
+              {}
+              {/* <HomeIcon /> */}
+            </a>
+          </NavigationMenu.Link>
+          {/* <NavigationMenu.Link asChild>
             <a href="/posts">
-              {" "}
               <InfoCircledIcon /> Post
             </a>
-          </NavigationMenu.Link>
-          <NavigationMenu.Link asChild>
-            <a href="/createpost">
-              {" "}
-              <EnvelopeClosedIcon />
-              Create Post
-            </a>
-          </NavigationMenu.Link>
+          </NavigationMenu.Link> */}
         </NavigationMenu.Item>
       </NavigationMenu.List>
     </NavigationMenu.Root>

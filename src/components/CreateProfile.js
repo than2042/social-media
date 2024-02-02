@@ -3,6 +3,8 @@ import { sql } from "@vercel/postgres";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
+import "../styles/CreatePost.css";
+
 const CreateProfile = () => {
   const { userId } = auth();
 
@@ -16,7 +18,7 @@ const CreateProfile = () => {
   }
 
   return (
-    <div>
+    <div className="createPostContainer">
       <h2>Create Profile</h2>
       <form action={addNewProfile}>
         <input name="username" placeholder="Username" />
