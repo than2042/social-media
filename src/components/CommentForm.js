@@ -1,6 +1,13 @@
 import SendIcon from "@mui/icons-material/Send";
 
-const CommentForm = ({ handleComment, name, type, id, onClose }) => {
+const CommentForm = ({
+  handleComment,
+  name,
+  type,
+  id,
+  onClose,
+  defaultValue,
+}) => {
   return (
     <div>
       <form className="commentForm" action={handleComment}>
@@ -11,6 +18,7 @@ const CommentForm = ({ handleComment, name, type, id, onClose }) => {
           name={name}
           type={type}
           placeholder={name}
+          defaultValue={defaultValue}
         />
         <button className="commentSend" onClick={onClose}>
           <SendIcon />

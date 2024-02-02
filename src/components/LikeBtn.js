@@ -28,7 +28,7 @@ const LikeBtn = async ({ post_id }) => {
   };
 
   return (
-    <div>
+    <div className="likeCount">
       <form action={handleLike}>
         <p>Count: {likeCount.rows.length}</p>
         <button className="likeBtn" type="submit">

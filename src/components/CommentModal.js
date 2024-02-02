@@ -5,7 +5,9 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import CommentForm from "./CommentForm";
 
-const CommentModal = ({ handleComment, name, type, id }) => {
+import "../styles/comment.css";
+
+const CommentModal = ({ handleComment, name, type, id, defaultValue = "" }) => {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(true);
@@ -24,13 +26,14 @@ const CommentModal = ({ handleComment, name, type, id }) => {
           aria-describedby="modal-modal-description"
           className="modalOpen"
         >
-          <Box>
+          <Box className="muiBox">
             <CommentForm
               handleComment={handleComment}
               id={id}
               name={name}
               type={type}
               placeHolder={name}
+              defaultValue={defaultValue}
             />
           </Box>
         </Modal>
