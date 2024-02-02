@@ -5,7 +5,7 @@ import "../styles/Footer.css";
 const Footer = () => {
   return (
     <div className="footerContainer">
-      <p className="footerText">&copy;thanthan2024</p>
+      <p className="footerText">&copy; thanthan2024</p>
       <Link href="https://twitter.com/?lang=en" replace prefetch={false}>
         <TwitterLogoIcon />
       </Link>

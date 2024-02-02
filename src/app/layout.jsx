@@ -4,7 +4,8 @@ import { ClerkProvider, auth, UserButton, SignIn } from "@clerk/nextjs";
 import Link from "next/link";
 import Header from "@/components/Header";
 import CreateProfile from "@/components/CreateProfile";
-// import Footer from "@/components/Footer";
+import Footer from "@/components/Footer";
+
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -41,8 +42,7 @@ export default async function RootLayout({ children }) {
           )}
           {!userId && <SignIn />}
           {userId && rowCount === 0 && <CreateProfile />}
-
-          {/* <Footer /> */}
+          <Footer />
         </body>
       </html>
     </ClerkProvider>
