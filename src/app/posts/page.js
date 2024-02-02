@@ -14,13 +14,11 @@ const PostPage = async () => {
 
   const comments = await sql`SELECT * FROM sm_comment`;
 
-  // const commentId = comments.rows[0]?.id;
-  // console.log(commentId, "cm");
-
   const handleEditComment = async (formData) => {
     "use server";
     const comment = formData.get("comment");
     const id = formData.get("id");
+    // get a id to update form comment table rather than using params to route
     await sql`UPDATE sm_comment SET comment = ${comment} WHERE id = ${parseInt(
       id
     )}`;
@@ -46,29 +44,27 @@ const PostPage = async () => {
       <div>
         <CreatePost />
       </div>
-      <div>
-        <div>
-          {posts.rows.map((post) => {
-            return (
-              <div key={post.id}>
-                <h1 key={post.id + post.content}>{post.content}</h1>
-                <p key={post.sm_user_id}>{post.sm_user_id}</p>
-                <div className="modalContainer">
-                  <LikeBtn post_id={post.id} />
-                  <CommentModal
-                    key={post.id}
-                    handleComment={handleComment}
-                    name="comment"
-                    type="comment"
-                    id={post.id}
-                    placholder="comment"
-                    defaultValue={post.comment}
-                  />
-                </div>
+      <div className={styles.itemContainer}>
+        {posts.rows.map((post) => {
+          return (
+            <div className={styles.eachItem} key={post.id}>
+              <h1 key={post.id + post.content}>{post.content}</h1>
+              <p key={post.sm_user_id}>{post.sm_user_id}</p>
+              <div className={styles.modalContainer}>
+                <LikeBtn post_id={post.id} />
+                <CommentModal
+                  key={post.id}
+                  handleComment={handleComment}
+                  name="comment"
+                  type="comment"
+                  id={post.id}
+                  placholder="comment"
+                  defaultValue={post.comment}
+                />
               </div>
-            );
-          })}
-        </div>
+            </div>
+          );
+        })}
       </div>
       <div className="commentContainer">
         {comments.rows.map((comment) => {

@@ -58,12 +58,18 @@ button:hover {
   text-decoration: none;
 }
 
+.likeCount {
+  margin-top: 1rem;
+}
+
 .likeBtn {
   border: none;
   width: 2rem;
   height: 2rem;
 }
 
-.likeCount {
+.likeForm {
+  width: 9rem;
   display: flex;
+  flex-direction: row;
 }

@@ -3,9 +3,10 @@ import { useState } from "react";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import ChatIcon from "@mui/icons-material/Chat";
 import CommentForm from "./CommentForm";
 
-import "../styles/comment.css";
+import "../styles/Comment.css";
 
 const CommentModal = ({ handleComment, name, type, id, defaultValue = "" }) => {
   const [open, setOpen] = useState(false);
@@ -17,14 +18,14 @@ const CommentModal = ({ handleComment, name, type, id, defaultValue = "" }) => {
     <div>
       <div>
         <Button className="modalOpen" onClick={handleOpen}>
-          Open modal
+          <ChatIcon />
         </Button>
         <Modal
           open={open}
           onClose={handleClose}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
-          className="modalOpen"
+          className="modal"
         >
           <Box className="muiBox">
             <CommentForm

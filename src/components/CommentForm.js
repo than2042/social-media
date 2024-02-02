@@ -1,5 +1,7 @@
 import SendIcon from "@mui/icons-material/Send";
 
+import "../styles/Comment.css";
+
 const CommentForm = ({
   handleComment,
   name,
