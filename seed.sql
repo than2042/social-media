@@ -33,6 +33,8 @@ FROM sm_like
 INNER JOIN sm_user
 ON sm_like.sm_user_id = sm_user.clerk_user_id;
 
+select sm_user.id, sm_user.username from sm_post inner join sm_user on sm_user.id = sm_user.id
+
 SELECT * FROM sm_comment WHERE id = id
 
 -- drop column form talbe

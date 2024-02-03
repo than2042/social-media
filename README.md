@@ -34,3 +34,52 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+- Link github to vercel => link postgres
+- setting => environemnt variables => add clerk publish_key and secret_key
+
+## Challenges
+
+- Qurey junction table
+- filter to see which user likes post and show userName on each post
+- CreateProfile using cleark to show SignIn or home page
+- passing props to client to server component
+- some other functionality in server component
+
+## User Stories
+
+🐿️ As a user, I am able to sign up for an account and create a user profile
+🐿️ As a user, I am able to log in and out of my account
+🐿️ As a user, I am able to create posts on my profile timeline
+🐿️ As a user, I am able to see all posts by all users on a global timeline
+
+## Stretch Stories
+
+🐿️ As a user, I am able to see a list of other user's posts and/or profiles on the site
+🐿️ As a user, I am able able to visit other user profiles
+🐿️ As a user, I am able to follow other users
+🐿️ As a user, I am able to like posts I think are good, and see how many likes a post has
+
+## Requirements
+
+🎯 Use Clerk.com to set up user signup and login.
+
+🎯 Use the Clerk userId to associate posts with a user.
+
+🎯 Enable each user to create a profile associated with their userId, and a form to input their biography and location data, etc. with a URL similar to /user/[userId].
+
+🎯 Enable users to create posts associated with the userId, and display those posts on the user's profile page
+
+🎯 Show a 404 error if a user profile doesn't exist
+
+🎯 Use at least 1 Radix UI Primitive or similar
+
+## Stretch Goals
+
+🏹 Enable users to visit other user profiles after seeing their posts on a global timeline
+
+🏹 Enable users to follow other users by creating a follower and follwee relationship between two user profiles
+
+🏹 Enable users to like other users' posts by creating a user_id and liked_post relationship in a junction table
+
+🏹 A user's biography cannot be blank. If a user logs in but doesn't have a biography set, they should be asked to fill one in

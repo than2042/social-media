@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import CreatePost from "@/components/CreatePost";
 import LikeBtn from "@/components/LikeBtn";
 import CommentModal from "@/components/CommentModal";
+import CloseIcon from "@mui/icons-material/Close";
 
 import styles from "../page.module.css";
 
@@ -18,6 +19,12 @@ const PostPage = async () => {
   FROM sm_like
   INNER JOIN sm_user
   ON sm_like.sm_user_id = sm_user.clerk_user_id;`;
+  console.log(likes, "like");
+
+  // const showUser =
+  //   await sql`SELECT sm_user.id, sm_user.username FROM sm_post INNER JOIN sm_user ON sm_user.id = sm_user.id`;
+
+  // console.log(showUser, "sh");
 
   const handleEditComment = async (formData) => {
     "use server";
@@ -44,6 +51,16 @@ const PostPage = async () => {
     }
   };
 
+  const handleDelete = async (formData) => {
+    "use server";
+    const post_id = formData.get("id");
+    await sql`DELETE FROM sm_comment WHERE sm_post_id = ${post_id}`;
+    await sql`DELETE FROm sm_like WHERE sm_post_id = ${post_id}`;
+    await sql`DELETE FROM sm_post WHERE id = ${post_id};`;
+    revalidatePath("/");
+    redirect("/");
+  };
+
   return (
     <div className={styles.postContainer}>
       <div>
@@ -55,8 +72,8 @@ const PostPage = async () => {
             <div className={styles.eachItem} key={post.id}>
               <h1 key={post.id + post.content}>{post.content}</h1>
               <p key={post.sm_user_id}>
-                {likes.rows.map((like) => {
-                  return <span key={like.id}>{like.username || ""}</span>;
+                {likes.rows.map((user) => {
+                  return <span key={user.id}>{user.username || ""}</span>;
                 })}
               </p>
               <div className={styles.modalContainer}>
@@ -72,6 +89,12 @@ const PostPage = async () => {
                   onClose="onClose"
                 />
               </div>
+              <form action={handleDelete} method="post">
+                <input type="hidden" name="id" value={post.id} />
+                <button className={styles.danger} type="submit">
+                  <CloseIcon />
+                </button>
+              </form>
             </div>
           );
         })}
