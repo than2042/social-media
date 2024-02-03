@@ -34,5 +34,5 @@ body {
     rgba(3, 3, 91, 0.9234287464985994) 28%,
     rgba(0, 212, 255, 1) 100%
   );
-  border-radius: 0 0 20rem 20rem;
+  border-radius: 0 0 20rem 0;
 }

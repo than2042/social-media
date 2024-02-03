@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import SendIcon from "@mui/icons-material/Send";
 
 import "../styles/comment.css";
@@ -9,7 +10,19 @@ const CommentForm = ({
   id,
   onClose,
   defaultValue,
+  reset,
 }) => {
+  const commentFromRest = useRef(null);
+
+  const resetForm = () => {
+    if (commentFromRest.current) {
+      commentFromRest.current.reset();
+    }
+    if (reset) {
+      reset();
+    }
+  };
+
   return (
     <div>
       <form className="commentForm" action={handleComment}>
@@ -22,7 +35,13 @@ const CommentForm = ({
           placeholder={name}
           defaultValue={defaultValue}
         />
-        <button className="commentSend" onClick={onClose}>
+        <button
+          className="commentSend"
+          onClick={() => {
+            resetForm();
+            onClose();
+          }}
+        >
           <SendIcon />
         </button>
       </form>

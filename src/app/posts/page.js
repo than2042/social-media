@@ -14,6 +14,11 @@ const PostPage = async () => {
 
   const comments = await sql`SELECT * FROM sm_comment`;
 
+  const likes = await sql`SELECT sm_like.id, sm_user.username
+  FROM sm_like
+  INNER JOIN sm_user
+  ON sm_like.sm_user_id = sm_user.clerk_user_id;`;
+
   const handleEditComment = async (formData) => {
     "use server";
     const comment = formData.get("comment");
@@ -49,7 +54,11 @@ const PostPage = async () => {
           return (
             <div className={styles.eachItem} key={post.id}>
               <h1 key={post.id + post.content}>{post.content}</h1>
-              <p key={post.sm_user_id}>{post.sm_user_id}</p>
+              <p key={post.sm_user_id}>
+                {likes.rows.map((like) => {
+                  return <span key={like.id}>{like.username || ""}</span>;
+                })}
+              </p>
               <div className={styles.modalContainer}>
                 <LikeBtn post_id={post.id} />
                 <CommentModal
@@ -60,6 +69,7 @@ const PostPage = async () => {
                   id={post.id}
                   placholder="comment"
                   defaultValue={post.comment}
+                  onClose="onClose"
                 />
               </div>
             </div>
