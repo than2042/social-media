@@ -1,10 +1,12 @@
+import { Suspense } from "react";
 import { sql } from "@vercel/postgres";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import CreatePost from "@/components/CreatePost";
-import LikeBtn from "@/components/LikeBtn";
-import CommentModal from "@/components/CommentModal";
 import CloseIcon from "@mui/icons-material/Close";
+import CommentModal from "@/components/CommentModal";
+import CreatePost from "@/components/CreatePost";
+import Follower from "@/components/Follower";
+import LikeBtn from "@/components/LikeBtn";
 
 import styles from "../page.module.css";
 
@@ -19,10 +21,9 @@ const PostPage = async () => {
   FROM sm_like
   INNER JOIN sm_user
   ON sm_like.sm_user_id = sm_user.clerk_user_id;`;
-  console.log(likes, "like");
 
   // const showUser =
-  //   await sql`SELECT sm_user.id, sm_user.username FROM sm_post INNER JOIN sm_user ON sm_user.id = sm_user.id`;
+  //   await sql`SELECT sm_user.id, sm_user.username FROM sm_post INNER JOIN sm_user ON sm_user.id = sm_user.id WHERE sm_user_id = ${posts.rows.id}`;
 
   // console.log(showUser, "sh");
 
@@ -61,44 +62,67 @@ const PostPage = async () => {
     redirect("/");
   };
 
+  const handleFollow = async (formData) => {
+    "use server";
+    const sm_user_id = formData.get("userId");
+    console.log(sm_user_id, "id");
+    await sql`INSERT INTO follower (sm_user_id) VALUES (${sm_user_id}) `;
+    revalidatePath("/");
+    redirect("/");
+  };
+
   return (
     <div className={styles.postContainer}>
       <div>
         <CreatePost />
       </div>
-      <div className={styles.itemContainer}>
-        {posts.rows.map((post) => {
-          return (
-            <div className={styles.eachItem} key={post.id}>
-              <h1 key={post.id + post.content}>{post.content}</h1>
-              <p key={post.sm_user_id}>
-                {likes.rows.map((user) => {
+      <Suspense fallback={<p>Loading feed...</p>}>
+        <div className={styles.itemContainer}>
+          {posts.rows.map((post) => {
+            return (
+              <div className={styles.eachItem} key={post.id}>
+                <h1 key={post.id + post.content}>{post.content}</h1>
+                {/* <p key={post.sm_user_id}>
+                {showUser.rows.map((user) => {
                   return <span key={user.id}>{user.username || ""}</span>;
                 })}
-              </p>
-              <div className={styles.modalContainer}>
-                <LikeBtn post_id={post.id} />
-                <CommentModal
-                  key={post.id}
-                  handleComment={handleComment}
-                  name="comment"
-                  type="comment"
+              </p> */}
+                <p key={post.sm_user_id}>
+                  {likes.rows.map((user) => {
+                    return <span key={user.id}>{user.username || ""}</span>;
+                  })}
+                </p>
+
+                <div className={styles.modalContainer}>
+                  <LikeBtn post_id={post.id} />
+                  <CommentModal
+                    key={post.id}
+                    handleComment={handleComment}
+                    name="comment"
+                    type="comment"
+                    id={post.id}
+                    placholder="comment"
+                    defaultValue={post.comment}
+                    onClose="onClose"
+                  />
+                </div>
+                <form action={handleDelete} method="post">
+                  <input type="hidden" name="id" value={post.id} />
+                  <button className={styles.danger} type="submit">
+                    <CloseIcon />
+                  </button>
+                </form>
+                <Follower
+                  handleFollow={handleFollow}
                   id={post.id}
-                  placholder="comment"
-                  defaultValue={post.comment}
-                  onClose="onClose"
+                  value={post.sm_user_id}
+                  name="follower"
                 />
               </div>
-              <form action={handleDelete} method="post">
-                <input type="hidden" name="id" value={post.id} />
-                <button className={styles.danger} type="submit">
-                  <CloseIcon />
-                </button>
-              </form>
-            </div>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
+      </Suspense>
       <div className="commentContainer">
         {comments.rows.map((comment) => {
           return (

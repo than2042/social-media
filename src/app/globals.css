@@ -36,3 +36,14 @@ body {
   );
   border-radius: 0 0 20rem 0;
 }
+
+.signIn {
+  color: #f0f8ff;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.cl-internal-hegiim {
+  display: none;
+}

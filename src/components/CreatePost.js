@@ -2,6 +2,7 @@ import { auth } from "@clerk/nextjs";
 import { sql } from "@vercel/postgres";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { Suspense } from "react";
 
 import "../styles/CreatePost.css";
 
@@ -19,20 +20,22 @@ const CreatePost = async () => {
   };
 
   return (
-    <div className="createPostContainer">
-      <h2>Create Your Post</h2>
-      <form className="createForm" action={handleCreate}>
-        <textarea
-          key="id"
-          className="textarea"
-          id="textarea"
-          name="content"
-          type="content"
-          placeholder="What's on your mind?"
-        />
-        <button className="postBtn"> Post </button>
-      </form>
-    </div>
+    <Suspense fallback={<p>Loading feed...</p>}>
+      <div className="createPostContainer">
+        <h2>Create Your Post</h2>
+        <form className="createForm" action={handleCreate}>
+          <textarea
+            key="id"
+            className="textarea"
+            id="textarea"
+            name="content"
+            type="content"
+            placeholder="What's on your mind?"
+          />
+          <button className="postBtn"> Post </button>
+        </form>
+      </div>
+    </Suspense>
   );
 };
 

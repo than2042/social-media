@@ -46,7 +46,10 @@ ALTER TABLE sm_post
 ADD  sm_like_id INTEGER REFERENCES sm_like(id)
 
 ALTER TABLE sm_post
-ADD follower_id INTEGER REFERENCES follower(id)  
+ADD follower_id INTEGER REFERENCES follower(id) 
+
+ALTER TABLE sm_post
+ADD sm_user_id INTEGER REFERENCES sm_user(id)
 
 -- delete table
 drop table sm_user 
