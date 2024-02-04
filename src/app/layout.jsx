@@ -12,7 +12,7 @@ const inter = Inter({ subsets: ["latin"] });
 const roboto = Roboto({ subsets: ["greek"], weight: "400" });
 
 export const metadata = {
-  title: "Social Network",
+  title: "TTelebook",
   description: "This is create with nextJs",
 };
 
