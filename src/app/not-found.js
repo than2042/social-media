@@ -2,7 +2,7 @@
 
 const NotFound = () => {
   return (
-    <div>
+    <div className="notFound">
       <h2>404 Not found, have you created profile yet? </h2>
     </div>
   );

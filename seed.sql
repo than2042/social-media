@@ -61,6 +61,9 @@ DELETE FROM sm_user WHERE id = 2
  DELETE FROM sm_post
  WHERE follower_id = 1;
 
+DELETE FROM sm_post
+ WHERE sm_user_id = null;
+
 -- delete multiple id
  DELETE FROM sm_like
  WHERE id Between 1 and 14;

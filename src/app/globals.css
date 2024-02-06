@@ -47,3 +47,12 @@ body {
 .cl-internal-hegiim {
   display: none !important;
 }
+
+.notFound {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  width: 50%;
+  margin: 20rem auto;
+  /* color: bisque; */
+}

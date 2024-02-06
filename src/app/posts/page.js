@@ -17,10 +17,12 @@ const PostPage = async () => {
 
   const comments = await sql`SELECT * FROM sm_comment`;
 
-  const likes = await sql`SELECT sm_like.id, sm_user.username
-  FROM sm_like
-  INNER JOIN sm_user
-  ON sm_like.sm_user_id = sm_user.clerk_user_id;`;
+  // const likes = await sql`SELECT sm_like.id, sm_user.username
+  // FROM sm_like
+  // INNER JOIN sm_user
+  // ON sm_like.sm_user_id = sm_user.clerk_user_id;`;
+  // console.log(likes.rows.length, "li");
+  // console.log(likes.rows[0].username, "u");
 
   // const showUser =
   //   await sql`SELECT sm_user.id, sm_user.username FROM sm_post INNER JOIN sm_user ON sm_user.id = sm_user.id WHERE sm_user_id = ${posts.rows.id}`;
@@ -87,12 +89,11 @@ const PostPage = async () => {
                   return <span key={user.id}>{user.username || ""}</span>;
                 })}
               </p> */}
-                <p key={post.sm_user_id}>
-                  {likes.rows.map((user) => {
-                    return <span key={user.id}>{user.username || ""}</span>;
-                  })}
-                </p>
-
+                {/* <p key={post.sm_user_id}>
+                  {likes.rows.length > 0 && (
+                    <span key={post.id}>{likes.rows[0].username}</span>
+                  )}
+                </p> */}
                 <div className={styles.modalContainer}>
                   <LikeBtn post_id={post.id} />
                   <CommentModal
@@ -106,7 +107,7 @@ const PostPage = async () => {
                     onClose="onClose"
                   />
                 </div>
-                <form action={handleDelete} method="post">
+                <form action={handleDelete}>
                   <input type="hidden" name="id" value={post.id} />
                   <button className={styles.danger} type="submit">
                     <CloseIcon />
