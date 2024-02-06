@@ -8,14 +8,7 @@ import CommentForm from "./CommentForm";
 
 import "../styles/comment.css";
 
-const CommentModal = ({
-  handleComment,
-  name,
-  type,
-  id,
-  onClose,
-  defaultValue = "",
-}) => {
+const CommentModal = ({ handleComment, name, type, id, defaultValue = "" }) => {
   const [open, setOpen] = useState(false);
   const [isResetForm, setIsResetFrom] = useState(false);
 
@@ -53,7 +46,6 @@ const CommentModal = ({
               type={type}
               placeHolder={name}
               defaultValue={defaultValue}
-              onClick={onClose}
               resetForm={isResetForm}
               reset={resetForm}
             />

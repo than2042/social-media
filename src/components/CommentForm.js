@@ -8,7 +8,6 @@ const CommentForm = ({
   name,
   type,
   id,
-  onClose,
   defaultValue,
   reset,
 }) => {
@@ -39,7 +38,6 @@ const CommentForm = ({
           className="commentSend"
           onClick={() => {
             resetForm();
-            onClose();
           }}
         >
           <SendIcon />

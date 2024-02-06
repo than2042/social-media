@@ -11,23 +11,12 @@ import LikeBtn from "@/components/LikeBtn";
 import styles from "../page.module.css";
 
 const PostPage = async () => {
-  let sqlQuery = `SELECT * FROM sm_post`;
+  let sqlQuery = `SELECT sm_post.id, sm_post.content, sm_user.username FROM sm_post
+  JOIN sm_user ON sm_post.sm_user_id = sm_user.id`;
 
   const posts = await sql.query(sqlQuery);
 
   const comments = await sql`SELECT * FROM sm_comment`;
-
-  // const likes = await sql`SELECT sm_like.id, sm_user.username
-  // FROM sm_like
-  // INNER JOIN sm_user
-  // ON sm_like.sm_user_id = sm_user.clerk_user_id;`;
-  // console.log(likes.rows.length, "li");
-  // console.log(likes.rows[0].username, "u");
-
-  // const showUser =
-  //   await sql`SELECT sm_user.id, sm_user.username FROM sm_post INNER JOIN sm_user ON sm_user.id = sm_user.id WHERE sm_user_id = ${posts.rows.id}`;
-
-  // console.log(showUser, "sh");
 
   const handleEditComment = async (formData) => {
     "use server";
@@ -84,16 +73,7 @@ const PostPage = async () => {
             return (
               <div className={styles.eachItem} key={post.id}>
                 <h1 key={post.id + post.content}>{post.content}</h1>
-                {/* <p key={post.sm_user_id}>
-                {showUser.rows.map((user) => {
-                  return <span key={user.id}>{user.username || ""}</span>;
-                })}
-              </p> */}
-                {/* <p key={post.sm_user_id}>
-                  {likes.rows.length > 0 && (
-                    <span key={post.id}>{likes.rows[0].username}</span>
-                  )}
-                </p> */}
+                <p>{post.username}</p>
                 <div className={styles.modalContainer}>
                   <LikeBtn post_id={post.id} />
                   <CommentModal
