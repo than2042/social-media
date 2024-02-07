@@ -2,8 +2,8 @@ import { sql } from "@vercel/postgres";
 import { auth } from "@clerk/nextjs";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import "../styles/CreatePost.css";
-import { ThumbUp } from "@mui/icons-material";
 
 const LikeBtn = async ({ post_id }) => {
   const { userId } = auth();
@@ -16,8 +16,6 @@ const LikeBtn = async ({ post_id }) => {
       INNER JOIN sm_user
       ON sm_like.sm_user_id = sm_user.clerk_user_id
       WHERE sm_like.sm_post_id = ${post_id}`;
-  console.log(likes.rows.length, "li");
-  // console.log(likes.rows[0].username, "user");
 
   const likedRes =
     await sql`SELECT * FROM sm_like WHERE sm_post_id = ${post_id} AND sm_user_id = ${userId}`;
@@ -39,11 +37,11 @@ const LikeBtn = async ({ post_id }) => {
     <div className="likeCount">
       <form className="likeForm" action={handleLike}>
         {likes.rows.map((like) => (
-          <p>{like.username}</p>
+          <p key={likes.id + likes.username}>{like.username}</p>
         ))}
         <p>Likes: {likeCount.rows.length}</p>
         <button className="likeBtn" type="submit">
-          {hasLiked && <ThumbUp />}
+          {hasLiked && <ThumbUpIcon />}
         </button>
       </form>
     </div>
